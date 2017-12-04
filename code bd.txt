@@ -1,4 +1,4 @@
-CREATE TABLE instituicoes(id_instituicao integer, login varchar(16), senha varchar(16),nome_instituicao varchar, email varchar(16), telefone varchar(16))
+CREATE TABLE instituicoes(id_instituicao integer, login_instituicao varchar(16), senha_instituicao varchar(16),nome_instituicao varchar, email_instituicao varchar(16), telefone_instituicao varchar(16))
 CREATE TABLE doacoes(id_doacao integer,id_usuario integer, id_instituicao integer, id_tipo_doacao integer, data_doacao varchar(12), quantidade varchar(30))
 CREATE TABLE usuarios(id_usuario integer,nome_usuario varchar(60), login_usuario varchar(60), cpf_usuario varchar(60),telefone_usuario varchar(60),email_usuario varchar(60),endereco_usuario varchar(60), senha_usuario varchar(60))
 CREATE TABLE TIPO_DOACAO(ID_TIPO_DOACAO INTEGER, NOME_TIPO VARCHAR(30))
