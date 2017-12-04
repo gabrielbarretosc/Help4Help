@@ -25,7 +25,7 @@ public class Conexao {
 	
 	private Conexao() {
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/help4help","postgres","capuccino");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/help4help","nomebanco","senha");
 		} catch (SQLException e) {
 			System.out.println("Erro ao conectar com o banco: "+e.getMessage());
 			e.printStackTrace();
