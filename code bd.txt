@@ -1,0 +1,26 @@
+CREATE TABLE instituicoes(id_instituicao integer, login varchar(16), senha varchar(16),nome_instituicao varchar, email varchar(16), telefone varchar(16))
+CREATE TABLE doacoes(id_doacao integer,id_usuario integer, id_instituicao integer, id_tipo_doacao integer, data_doacao varchar(12), quantidade varchar(30))
+CREATE TABLE usuarios(id_usuario integer,nome_usuario varchar(60), login_usuario varchar(60), cpf_usuario varchar(60),telefone_usuario varchar(60),email_usuario varchar(60),endereco_usuario varchar(60), senha_usuario varchar(60))
+CREATE TABLE TIPO_DOACAO(ID_TIPO_DOACAO INTEGER, NOME_TIPO VARCHAR(30))
+
+ALTER TABLE TIPO_DOACAO ADD CONSTRAINT PK_TIPO_DOACAO PRIMARY KEY(id_tipo_doacao)
+ALTER TABLE usuarios ADD CONSTRAINT pk_usuario PRIMARY KEY (id_usuario)
+ALTER TABLE instituicoes ADD CONSTRAINT pk_instituicao PRIMARY KEY (id_instituicao)
+ALTER TABLE doacoes ADD CONSTRAINT fk_doacao_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+ALTER TABLE doacoes ADD CONSTRAINT fk_doacao_instituicao FOREIGN KEY (id_instituicao) REFERENCES instituicoes (id_instituicao)
+ALTER TABLE doacoes ADD CONSTRAINT fk_doacao_tipo FOREIGN KEY (id_tipo_doacao) REFERENCES tipo_doacao(id_tipo_doacao)
+
+insert into tipo_doacao (id_tipo_doacao,nome_tipo)values(1,'alimento');
+insert into tipo_doacao (id_tipo_doacao,nome_tipo)values(2,'dinheiro');
+
+CREATE SEQUENCE tabela_coluna_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1  --ficar atento nessa linha, colocar o último id da sua coluna
+  CACHE 1;
+ALTER TABLE tabela_coluna_seq
+  OWNER TO postgres
+ALTER TABLE doacoes ALTER COLUMN id_doacao SET DEFAULT nextval('tabela_coluna_seq'::regclass)
+ALTER TABLE instituicoes ALTER COLUMN id_instituicao SET DEFAULT nextval('tabela_coluna_seq'::regclass)
+ALTER TABLE usuarios ALTER COLUMN id_usuario SET DEFAULT nextval('tabela_coluna_seq'::regclass)
