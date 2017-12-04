@@ -25,18 +25,19 @@ public class InstituicaoDAO {
 		List<Instituicao> instituicoes = new ArrayList<>();
 		try {
 			stmt = conexao.getConnection().createStatement();
-			ResultSet rs = stmt.executeQuery("select id_instituicao,nome_instituicao, login_instituicao, senha_instituicao, email_instituicao, telefone_instituicao from instituicoes");
+			ResultSet rs = stmt.executeQuery(
+					"select id_instituicao,nome_instituicao, login, senha, email, telefone from instituicoes");
 			while (rs.next()) {
-				
-				Instituicao i= new Instituicao ();
+
+				Instituicao i = new Instituicao();
 				i.setId(rs.getInt("id_instituicao"));
-				i.setLogin(rs.getString("login_instituicao"));
-				i.setEmail(rs.getString("email_instituicao"));
+				i.setLogin(rs.getString("login"));
+				i.setEmail(rs.getString("email"));
 				i.setNome(rs.getString("nome_instituicao"));
-				i.setSenha(rs.getString("senha_instituicao"));
-				i.setTelefone(rs.getString("telefone_instituicao"));
-						instituicoes.add(i);
-				
+				i.setSenha(rs.getString("senha"));
+				i.setTelefone(rs.getString("telefone"));
+				instituicoes.add(i);
+
 			}
 			stmt.close();
 
@@ -51,9 +52,9 @@ public class InstituicaoDAO {
 
 	public void inserir(Instituicao instituicao) {
 		try {
-			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("Insert into instituicoes (login_instituicao, senha_instituicao, nome_instituicao, telefone_instituicao, email_instituicao) values (?,?,?,?,?);");
-			ps.setString(1, instituicao.getLogin() );
+			PreparedStatement ps = conexao.getConnection().prepareStatement(
+					"insert into instituicoes (login, senha, nome_instituicao, telefone, email) values (?,?,?,?,?);");
+			ps.setString(1, instituicao.getLogin());
 			ps.setString(2, instituicao.getSenha());
 			ps.setString(3, instituicao.getNome());
 			ps.setString(4, instituicao.getTelefone());
@@ -71,23 +72,23 @@ public class InstituicaoDAO {
 		Instituicao i = null;
 
 		try {
-			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("select id_instituicao,nome_instituicao, login_instituicao, senha_instituicao, email_instituicao, telefone_instituicao from instituicoes where id=?");
+			PreparedStatement ps = conexao.getConnection().prepareStatement(
+					"select id_instituicao,nome_instituicao, login, senha, email, telefone from instituicoes where id=?");
 			ps.setInt(1, cod);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				i = new Instituicao();
 				i.setId(rs.getInt("id_instituicao"));
-				i.setLogin(rs.getString("login_instituicao"));
-				i.setEmail(rs.getString("email_instituicao"));
+				i.setLogin(rs.getString("login"));
+				i.setEmail(rs.getString("email"));
 				i.setNome(rs.getString("nome_instituicao"));
-				i.setSenha(rs.getString("senha_instituicao"));
-				i.setTelefone(rs.getString("telefone_instituicao"));
-	
+				i.setSenha(rs.getString("senha"));
+				i.setTelefone(rs.getString("telefone"));
+
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -98,7 +99,7 @@ public class InstituicaoDAO {
 	public void close() {
 		conexao.closeConnection();
 	}
-	
+
 	public void delete(int id) {
 		PreparedStatement ps;
 		try {
@@ -109,14 +110,14 @@ public class InstituicaoDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
 	public void update(Instituicao instituicao) {
 		try {
-			
-			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("update instituiocoes set nome_instituicao=?,telefone_instituicao = ?, senha_instituicao = ? where id =?;");
+
+			PreparedStatement ps = conexao.getConnection().prepareStatement(
+					"update instituiocoes set nome_instituicao=?,telefone_instituicao = ?, senha_instituicao = ? where id =?;");
 			ps.setString(1, instituicao.getNome());
 			ps.setString(2, instituicao.getTelefone());
 			ps.setString(3, instituicao.getSenha());
@@ -125,5 +126,5 @@ public class InstituicaoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 }

@@ -28,23 +28,19 @@ public class DoacaoDAO {
 
 		try {
 			stmt = conexao.getConnection().createStatement();
-			ResultSet rs = stmt.executeQuery("select id_doacao, data_doacao, quantidade_doacao,id_instituicao,login_instituicao,senha_instituicao,email_instituicao,id_usuario,login_usuario,senha_usuario,email_usuario,id.tipo_doacao,nome_tipo from doacoes,instituicoes,usuarios ");
+			ResultSet rs = stmt.executeQuery("select id_doacao, data_doacao, quantidade_doacao,id_instituicao, instituicoes.nome_instituicoes, id_usuario, usuarios.nome_usuario, id.tipo_doacao,nome_tipo from doacoes,instituicoes,usuarios ");
 			while (rs.next()) {
 				Doacao d = new Doacao();
 				d.setId(rs.getInt("id_doacao"));
-				d.setDataDoacao(rs.getString("data_doacao"));
+				d.setDataDoacao(rs.getDate("data_doacao"));
 				d.setQuantidade(rs.getString("quantidade_doacao"));
 				Usuario u = new Usuario();
 				u.setId(rs.getInt("id_usuario"));
-				u.setLogin(rs.getString("login_usuario"));
-				u.setSenha(rs.getString("senha_usuario"));
-				u.setEmail(rs.getString("email_usuario"));
+				u.setNome(rs.getString("usuarios.nome_usuario"));
 				d.setUsuario(u);
 				Instituicao i = new Instituicao();
 				i.setId(rs.getInt("id_instituicao"));
-				i.setLogin(rs.getString("login_instituicao"));
-				i.setSenha(rs.getString("senha_instituicao"));
-				i.setEmail(rs.getString("email.instituicoes"));
+				i.setNome(rs.getString("instituicoes.nome_instituicoes"));
 				d.setInstituicao(i);
 				TipoDoacao t=new TipoDoacao();
 				t.setId(rs.getInt("id.tipo_doacao "));
@@ -65,7 +61,7 @@ public class DoacaoDAO {
 
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement("insert into doacoes (data_doacao, quantidade_doacao,id_instituicao,id_doacao,id.tipo_doacao) values (?,?,?,?,?);");
-			ps.setString(1, doacao.getDataDoacao());
+			ps.setDate(1, doacao.getDataDoacao());
 			ps.setString(2, doacao.getQuantidade());
 			ps.setInt(3, doacao.getInstituicao().getId());
 			ps.setInt(4, doacao.getUsuario().getId());
