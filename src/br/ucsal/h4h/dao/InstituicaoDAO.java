@@ -66,14 +66,35 @@ public class InstituicaoDAO {
 
 	}
 
-	public Instituicao getByID(int cod) {
+	public boolean Autenticar (Instituicao instituicao){
+		boolean autenticador = false;	
+		
+		try {
+			String sql = "select * from instituicoes where login_instituicao=? and senha_instituicao=?";
+			PreparedStatement pstm = conexao.getConnection().prepareStatement(sql);
+			pstm.setString(1, instituicao.getLogin());
+			pstm.setString(2, instituicao.getSenha());
+			ResultSet rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				autenticador = true;
+			}
+			rs.close();
+			pstm.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return autenticador;
+	}
+	
+	
+	public Instituicao getByID(int id) {
 
 		Instituicao i = null;
 
 		try {
-			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("select id_instituicao,nome_instituicao, login_instituicao, senha_instituicao, email_instituicao, telefone_instituicao from instituicoes where id=?");
-			ps.setInt(1, cod);
+			PreparedStatement ps = conexao.getConnection().prepareStatement("select id_instituicao,nome_instituicao, login_instituicao, senha_instituicao, email_instituicao, telefone_instituicao from instituicoes where id=?");
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				i = new Instituicao();

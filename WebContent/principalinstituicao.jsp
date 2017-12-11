@@ -13,7 +13,7 @@
 
 <body>
 <div class="w3-display-middle">
-<a href="usuariolist.jsp">
+<a href="doacaolist.jsp">
 <img border="0" alt="W3Schools" src="https://cdn.discordapp.com/attachments/367039436787154945/386730718082105344/doacao.png" width="200" height="200">
 </a>
 </div>

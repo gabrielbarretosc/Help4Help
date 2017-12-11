@@ -9,14 +9,10 @@
 	<title>Help4Help</title>
 
 </head>
-<c:import url="topo.jsp"></c:import>
-<c:import url="background.jsp"></c:import>
+
 <body>
 <div class="w3-display-middle container">
-<jsp:include page = "formDoacao.jsp" />
 </div>
 </body>
 
-<c:import url="rodape.jsp"></c:import>
-<c:import url="WEB-INF/css/footer.css"></c:import>
 </html>

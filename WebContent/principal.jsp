@@ -16,7 +16,7 @@
 <div class="w3-display-middle">
 <a href="editarperfil.jsp">
 <img border="0" alt="W3Schools" src="https://cdn.discordapp.com/attachments/367039436787154945/386730730765418507/perfil.png" width="200" height="200"></a><text class = w3-text-white>_____</text>
-<a href="efetuardoacao.jsp">
+<a href="/help4help/doacoes?q=new">
 <img border="0" alt="W3Schools" src="https://cdn.discordapp.com/attachments/367039436787154945/386730702919565323/ajude.png" width="200" height="200">
 </a>
   

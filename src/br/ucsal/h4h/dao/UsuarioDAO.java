@@ -19,6 +19,7 @@ public UsuarioDAO() {
 	this.conexao = Conexao.getConexao();
 }
 	
+
 public List<Usuario> listar() {
 	Statement stmt;
 	List<Usuario> usuarios = new ArrayList<>();
@@ -45,6 +46,26 @@ public List<Usuario> listar() {
 	return usuarios;
 }
 
+public boolean Autenticar (Usuario usuario){
+	boolean autenticador = false;	
+	
+	try {
+		String sql = "select * from usuarios where login_usuario=? and senha_usuario=?";
+		PreparedStatement pstm = conexao.getConnection().prepareStatement(sql);
+		pstm.setString(1, usuario.getLogin());
+		pstm.setString(2, usuario.getSenha());
+		ResultSet rs = pstm.executeQuery();
+		
+		if (rs.next()) {
+			autenticador = true;
+		}
+		rs.close();
+		pstm.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return autenticador;
+}
 public void inserir(Usuario usuario) {
 	try {
 		
@@ -65,14 +86,13 @@ public void inserir(Usuario usuario) {
 
 }
 
-public Usuario getByID(int cod) {
+public Usuario getByID(int id) {
 
 	Usuario u = null;
 
 	try {
-		PreparedStatement ps = conexao.getConnection()
-				.prepareStatement("select id_usuario, login_usuario, senha_usuario, email_usuario, cpf_usuario, endereco_usuario, telefone_usuario from usuarios where id=?");
-		ps.setInt(1, cod);
+		PreparedStatement ps = conexao.getConnection().prepareStatement("select id_usuario, login_usuario, senha_usuario, email_usuario, cpf_usuario, endereco_usuario, telefone_usuario from usuarios where id=?");
+		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			u = new Usuario();

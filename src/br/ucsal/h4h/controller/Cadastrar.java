@@ -43,7 +43,7 @@ public class Cadastrar extends HttpServlet {
 
 	        UsuarioDAO dao = new UsuarioDAO();
 	            dao.inserir(u);
-	  response.sendRedirect("agradecimento.jsp");
+	  response.sendRedirect("login.jsp");
 		
 	}
 

@@ -36,7 +36,7 @@ public class CadastrarInstituicao extends HttpServlet {
 	        
 	        InstituicaoDAO dao = new InstituicaoDAO();
 	            dao.inserir(i);
-	      	  response.sendRedirect("agradecimento.jsp");
+	      	  response.sendRedirect("loginInstituicao.jsp");
 
 	}
 

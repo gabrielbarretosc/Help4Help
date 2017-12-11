@@ -14,8 +14,14 @@
 
 <body>
 <div class="w3-display-middle">
-um form para editar o perfil como o de mjp
-  
+<h1>EDITAR PERFIL</h1><br>		
+<form action="usuarios" method="post">
+			<input type="hidden" name="id" value="${usuarios.id}"> 
+			Nome:<input type="text" name="nome" value="${usuarios.nome}" /><br>
+			Login:<input type="text" name="login" value="${usuarios.login}" /><br> 		 
+			Senha:<input type="text" name="senha" value="${usuarios.senha}" /><br> 
+			<input type="submit" value="Salvar" />  
+	</form>
 </div>
 
 

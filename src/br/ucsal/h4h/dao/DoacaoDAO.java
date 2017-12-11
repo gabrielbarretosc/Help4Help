@@ -59,11 +59,12 @@ public class DoacaoDAO {
 	public void inserir(Doacao doacao) {
 
 		try {
-			PreparedStatement ps = conexao.getConnection().prepareStatement("insert into doacoes (data_doacao, quantidade_doacao,id_instituicao,id_doacao) values (?,?,?,?);");
+			PreparedStatement ps = conexao.getConnection().prepareStatement("insert into doacoes (data_doacao,quantidade,id_instituicao, id_usuario, tipo_doacao) values (?,?,?,?,?);");
 			ps.setString(1, doacao.getDataDoacao());
 			ps.setString(2, doacao.getQuantidade());
 			ps.setInt(3, doacao.getInstituicao().getId());
 			ps.setInt(4, doacao.getUsuario().getId());
+			ps.setString(5, doacao.getTipoDoacao());
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
